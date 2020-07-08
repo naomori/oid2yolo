@@ -1,0 +1,13 @@
+{
+  "images": {
+    "train": "../oid/train/*.tar.gz",
+    "val": "../oid/val/*.tar.gz",
+    "test": "../oid/test/*.tar.gz"
+  },
+  "bbox": {
+    "train": "../oid/oidv6-train-annotations-bbox.csv",
+    "val": "../oid/validation-annotations-bbox.csv",
+    "test": "../oid/test-annotations-bbox.csv"
+  },
+  "class": "../oid/class-descriptions-boxable.csv"
+}
