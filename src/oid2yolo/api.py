@@ -1,21 +1,9 @@
 """Main API for oid2yolo project."""
-
-from collections import namedtuple
-
-
-# Oid2yolo element types : [oid_json: str, yolo_yaml: str]
-Oid2yolo = namedtuple('Oid2yolo', ['oid_json', 'yolo_yaml'])
-Oid2yolo.__new__.__defaults__ = (None, None)
+from oid2yolo.config import parse_oid, parse_yolo
 
 
-# custom exceptions
-class Oid2yoloException(Exception):
-    """A tasks error has occurred."""
+class Oid2yolo:
 
-
-def
-
-
-def extract_classes_from_oid(csv_file):
-    extracted_csv_file = ""
-    return extracted_csv_file
+    def __init__(self, oid_json, yolo_yaml):
+        self.oid_obj = parse_oid(oid_json)
+        self.yolo_obj = parse_yolo(yolo_yaml)
