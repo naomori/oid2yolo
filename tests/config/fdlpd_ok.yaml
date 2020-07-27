@@ -1,8 +1,8 @@
 # train and val datasets (image directory or *.txt file with image paths)
 
-train: ../yolo/images/train
-val: ../yolo/images/val
-test: ../yolo/images/test
+train: /workspace/oid2yolo_proj/tests/yolo/images/train
+val: /workspace/oid2yolo_proj/tests/yolo/images/val
+test: /workspace/oid2yolo_proj/tests/yolo/images/test
 
 # number of classes
 nc: 3

@@ -42,13 +42,15 @@
 /workspace/yolov5/labels/train/0a4d092f94a79ef7.txt # label
 ```
 
+したがって、画像ファイルのパスに文字列`images`は1つだけ含まれている必要があります。
+
 #### NOTE2: アノテーション情報について
 
 アノーテション情報は、`darknet format`で用意する必要があります。  
 `darknet format`では、1つの画像ファイルにつき、1つの`*.txt`ファイルを用意します。
 * 1行につき、1つのオブジェクト
 * 各行は、以下で構成されます。
-    - `class`
+    - `class`: names配列のindex
     - `x_center`
     - `y_center`
     - `width`
@@ -56,6 +58,12 @@
 * それぞれの column は space で区切られます。
 * Bouding Box は 0-1 で正規化した値を使います。
 * クラス番号は0から開始します(`*.yaml`ファイルで`names`として書いた順番です)。
+
+## 環境構築
+
+```bash
+~ ❯❯❯ docker pull ultralytics/yolov5
+```
 
 - - -
 [Open Images Dataset V6]: https://storage.googleapis.com/openimages/web/index.html

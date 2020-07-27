@@ -1,13 +1,20 @@
 {
   "images": {
-    "train": "../oid/train/*.tar.gz",
-    "val": "../oid/val/*.tar.gz",
-    "test": "../oid/test/*.tar.gz"
+    "train": "/workspace/oid2yolo_proj/tests/oid/train/*.tar.gz",
+    "val": "/workspace/oid2yolo_proj/tests/oid/val/*.tar.gz",
+    "test": "/workspace/oid2yolo_proj/tests/oid/test/*.tar.gz"
   },
   "bbox": {
-    "train": "../oid/oidv6-train-annotations-bbox.csv",
-    "val": "../oid/validation-annotations-bbox.csv",
-    "test": "../oid/test-annotations-bbox.csv"
+    "train": "/workspace/oid2yolo_proj/tests/oid/train-annotations-bbox.csv",
+    "val": "/workspace/oid2yolo_proj/tests/oid/validation-annotations-bbox.csv",
+    "test": "/workspace/oid2yolo_proj/tests/oid/test-annotations-bbox.csv"
   },
-  "class": "../oid/class-descriptions-boxable.csv"
+  "class": "/workspace/oid2yolo_proj/tests/oid/class-descriptions-boxable.csv",
+  "image_filter": [
+    ["Vehicle registration plate"],
+    ["Car", "Human face"],
+    ["Car", "Human head"],
+    ["Vehicle", "Human face"],
+    ["Vehicle", "Human head"]
+  ]
 }

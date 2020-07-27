@@ -12,7 +12,9 @@
   "class": "/workspace/oid2yolo_proj/oid/class-descriptions-boxable.csv",
   "image_filter": [
     ["Vehicle registration plate"],
-    ["Human face"],
-    ["Human head"]
+    ["Car", "Human face"],
+    ["Car", "Human head"],
+    ["Vehicle", "Human face"],
+    ["Vehicle", "Human head"]
   ]
 }

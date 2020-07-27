@@ -1,25 +1,17 @@
 """Minimal setup file for oid2yolo project."""
+import re
 
-from setuptools import setup, find_packages
+from setuptools import setup
 
+with open("src/oid2yolo/__init__.py", encoding="utf8") as f:
+    version = re.search(r'__version__ = "(.*?)"', f.read()).group(1)
+
+# Metadata goes in setup.cfg. These are here for GitHub's dependency graph.
 setup(
-    name='oid2yolo',
-    version='0.0.1',
-    license='BSD License',
-    description='Convert Open Images Dataset to YOLO format',
-
-    author='Naoki Morita',
-    author_email='naoki.morita@gmail.com',
-    url='https://github.com/naomori/oid2yolo.git',
-
-    packages=find_packages(where='src'),
-    package_dir={'': 'src'},
-
-    install_requires=['PyYAML'],
-
-    entry_points={
-        'console_scripts': [
-            'oid2yolo = oid2yolo.cli:oid2yolo_cli',
-        ]
-    },
+    name="Oid2yolo",
+    version=version,
+    install_requires=[
+        "PyYAML",
+        "pandas"
+    ]
 )
