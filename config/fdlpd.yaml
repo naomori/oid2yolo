@@ -5,7 +5,7 @@ val: /workspace/oid2yolo_proj/yolo/images/val
 test: /workspace/oid2yolo_proj/yolo/images/test
 
 # number of classes
-nc: 3
+nc: 2
 
 # class names
-names: ['Human face', 'Human head', 'Vehicle registration plate']
+names: ['Human face', 'Vehicle registration plate']

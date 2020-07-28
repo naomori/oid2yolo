@@ -86,7 +86,7 @@ def extract_images_from_tarballs_with_image_id(image_ids, tarballs_path, extract
     image_files = [image_id + ".jpg" for image_id in image_ids]
     os.makedirs(extract_dir, exist_ok=True)
     futures = []
-    with ProcessPoolExecutor(max_workers=8) as executor:
+    with ProcessPoolExecutor(max_workers=os.cpu_count()) as executor:
         for tarball in glob.glob(tarballs_path):
             future = executor.submit(extract_selected_images, tarball, image_files, extract_dir)
             futures.append(future)
@@ -136,7 +136,7 @@ def create_yolo_annotation(label_path, df_image, df_classes):
 def create_yolo_annotations(labels_path, oid_annotations_csv, df_classes):
     df_oid_annotations = pd.read_csv(oid_annotations_csv, header=0)
     futures = []
-    with ThreadPoolExecutor(max_workers=128) as executor:
+    with ThreadPoolExecutor(max_workers=os.cpu_count()*5) as executor:
         for label_path in labels_path:
             os.makedirs(os.path.dirname(label_path), exist_ok=True)
             image_id = os.path.splitext(os.path.basename(label_path))[0]

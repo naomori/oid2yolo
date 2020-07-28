@@ -3,6 +3,7 @@ import os
 import glob
 import re
 import shutil
+import random
 import cv2
 import pandas as pd
 import concurrent.futures
@@ -33,6 +34,14 @@ class Oid2yolo:
         self.annotation = {'train': None, 'val': None, 'test': None}
         self.image_filter = self.oid_obj["image_filter"]
 
+    def multiprocess_annotations(self, func):
+        futures = []
+        with ProcessPoolExecutor(max_workers=len(self.annotation)) as executor:
+            for anno_type in self.annotation.keys():
+                future = executor.submit(func, anno_type)
+                futures.append(future)
+        return futures
+
     def shrink_bbox(self, anno_type):
         label_filter = convert_label_filter(self.image_filter, self.df_all_classes)
         annotation = extract_from_oid_bbox_with_class_names(self.oid_obj['bbox'][anno_type],
@@ -40,11 +49,7 @@ class Oid2yolo:
         return anno_type, annotation
 
     def shrink_bboxes(self):
-        futures = []
-        with ProcessPoolExecutor(max_workers=3) as executor:
-            for anno_type in self.annotation.keys():
-                future = executor.submit(self.shrink_bbox, anno_type)
-                futures.append(future)
+        futures = self.multiprocess_annotations(self.shrink_bbox)
         concurrent.futures.wait(futures, timeout=None)
         result_list = [future.result() for future in concurrent.futures.as_completed(futures)]
         for result in result_list:
@@ -60,11 +65,7 @@ class Oid2yolo:
         return num_of_images
 
     def extract_images(self):
-        futures = []
-        with ProcessPoolExecutor(max_workers=3) as executor:
-            for anno_type in self.annotation.keys():
-                future = executor.submit(self.extract_images_with_type, anno_type)
-                futures.append(future)
+        futures = self.multiprocess_annotations(self.extract_images_with_type)
         concurrent.futures.wait(futures, timeout=None)
         num_of_extract_images = sum([future.result() for future in concurrent.futures.as_completed(futures)])
         return num_of_extract_images
@@ -78,11 +79,7 @@ class Oid2yolo:
     def create_annotations(self):
         file_total_num = 0
         annotation_total_num = 0
-        futures = []
-        with ProcessPoolExecutor(max_workers=5) as executor:
-            for anno_type in self.annotation.keys():
-                future = executor.submit(self.create_yolo_annotations, anno_type)
-                futures.append(future)
+        futures = self.multiprocess_annotations(self.create_yolo_annotations)
         concurrent.futures.wait(futures, timeout=None)
         result_list = [future.result() for future in concurrent.futures.as_completed(futures)]
         for result in result_list:
@@ -114,7 +111,8 @@ class Oid2yolo:
             print(f"no change")
             return len(train_images_path), len(val_images_path)
 
-        for src_image in src_path[:diff_num]:
+        random.seed(0)
+        for src_image in random.sample(src_path, diff_num):
             src_label = re.sub('.(jpg|jpeg|png|JPG|JPEG|PNG)$', '.txt', src_image).replace('images', 'labels')
             dst_label_dir = dst_image_dir.replace('images', 'labels')
             shutil.move(src_image, dst_image_dir)

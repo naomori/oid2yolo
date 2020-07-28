@@ -62,7 +62,7 @@ def execute_command(oid2yolo_obj, command, args):
             oid2yolo_extract_images(oid2yolo_obj)
         oid2yolo_create_annotations(oid2yolo_obj)
     elif command == "split":
-        oid2yolo_split_validation(oid2yolo_obj, args.val_prop)
+        oid2yolo_split_validation(oid2yolo_obj, float(args.val_prop))
     elif command == "confirm":
         oid2yolo_draw_bboxes(oid2yolo_obj, args.data_type)
     else:

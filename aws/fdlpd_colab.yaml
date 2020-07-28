@@ -1,0 +1,11 @@
+# train and val datasets (image directory or *.txt file with image paths)
+
+train: /content/yolov5/data/yolo/images/train
+val: /content/yolov5/data/yolo/images/val
+test: /content/yolov5/data/yolo/images/test
+
+# number of classes
+nc: 2
+
+# class names
+names: ['Human face', 'Vehicle registration plate']
