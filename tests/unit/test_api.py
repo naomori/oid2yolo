@@ -14,7 +14,7 @@ def test_create_instance():
 
 def test_shrink_bboxes():
     oid2yolo_obj = Oid2yolo(oid_path, yolo_path)
-    assert oid2yolo_obj.shrink_bboxes() is True
+    assert oid2yolo_obj.shrink_bbox_all() is True
     assert os.path.isfile(oid2yolo_obj.annotation['train'])
     assert os.path.isfile(oid2yolo_obj.annotation['val'])
     assert os.path.isfile(oid2yolo_obj.annotation['test'])
@@ -22,7 +22,7 @@ def test_shrink_bboxes():
 
 def test_extract_images_with_type():
     oid2yolo_obj = Oid2yolo(oid_path, yolo_path)
-    oid2yolo_obj.shrink_bboxes()
+    oid2yolo_obj.shrink_bbox_all()
     num_of_images = oid2yolo_obj.extract_images_with_type('train')
     assert num_of_images > 0
     num_of_images = oid2yolo_obj.extract_images_with_type('val')
@@ -33,14 +33,14 @@ def test_extract_images_with_type():
 
 def test_extract_images():
     oid2yolo_obj = Oid2yolo(oid_path, yolo_path)
-    oid2yolo_obj.shrink_bboxes()
+    oid2yolo_obj.shrink_bbox_all()
     num_of_images = oid2yolo_obj.extract_images()
     assert num_of_images > 0
 
 
 def test_create_annotations():
     oid2yolo_obj = Oid2yolo(oid_path, yolo_path)
-    oid2yolo_obj.shrink_bboxes()
+    oid2yolo_obj.shrink_bbox_all()
     oid2yolo_obj.extract_images()
     file_num, anno_num = oid2yolo_obj.create_annotations()
     assert file_num > 0

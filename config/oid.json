@@ -10,8 +10,17 @@
     "test": "/workspace/oid2yolo_proj/oid/test-annotations-bbox.csv"
   },
   "class": "/workspace/oid2yolo_proj/oid/class-descriptions-boxable.csv",
-  "image_filter": [
-    ["Vehicle registration plate"],
-    ["Human face"]
-  ]
+  "image_filter": {
+    "train_val": [
+      ["Vehicle registration plate"],
+      ["Human face", "Car"],
+      ["Human face", "Sun hat"],
+      ["Human face", "Helmet"],
+      ["Human face", "Sunglasses"]
+    ],
+    "test": [
+      ["Vehicle registration plate"],
+      ["Human face", "Person"]
+    ]
+  }
 }

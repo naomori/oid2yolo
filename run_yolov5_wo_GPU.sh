@@ -1,5 +1,6 @@
 #!/bin/bash
 docker run --detach \
+	-p 8888:8888 \
 	--privileged \
 	--shm-size=1g --ulimit memlock=-1 \
 	-it \
