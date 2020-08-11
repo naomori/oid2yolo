@@ -1,0 +1,11 @@
+# train and val datasets (image directory or *.txt file with image paths)
+
+train: /workspace/oid/screening/images/train
+val: /workspace/oid/screening/images/val
+test: /workspace/oid/screening/images/test
+
+# number of classes
+nc: 2
+
+# class names
+names: ['Human face', 'Vehicle registration plate']

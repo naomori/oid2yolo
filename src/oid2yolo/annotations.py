@@ -112,7 +112,7 @@ def extract_images_from_tarballs_with_image_id(image_ids, tarballs_path, extract
 
 
 def convert_path_of_images_to_labels(images_dir):
-    labels_path = [re.sub('.(jpg|jpeg|png|JPG|JPEG|PNG)$', '.txt', p).replace('images', 'labels')
+    labels_path = [re.sub('.(jpg|jpeg|png|JPG|JPEG|PNG)$', '.txt', p).replace('images/', 'labels/')
                    for p in glob.glob(images_dir + '/**', recursive=True)
                    if re.search('.(jpg|jpeg|png|JPG|JPEG|PNG)$', p)]
     return labels_path

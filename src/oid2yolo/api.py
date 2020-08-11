@@ -119,10 +119,10 @@ class Oid2yolo:
         for src in src_list:
             for src_image in random.sample(src['path'], abs(src['diff'])):
                 dst = random.choice([d for d in dst_list if d['diff'] > 0])
-                src_label = re.sub('.(jpg|jpeg|png|JPG|JPEG|PNG)$', '.txt', src_image).replace('images', 'labels')
+                src_label = re.sub('.(jpg|jpeg|png|JPG|JPEG|PNG)$', '.txt', src_image).replace('images/', 'labels/')
                 if dry_run is False:
                     shutil.move(src_image, dst['dir'])
-                    dst_path = shutil.move(src_label, dst['dir'].replace('images', 'labels'))
+                    dst_path = shutil.move(src_label, dst['dir'].replace('images/', 'labels/'))
                     move_label_list.append(dst_path)
                 else:
                     move_label_list.append(src_label)
@@ -135,7 +135,7 @@ class Oid2yolo:
 
     def draw_bbox(self, image_path):
         bbox_columns = ['class_index', 'x_center', 'y_center', 'width', 'height']
-        label_path = re.sub('.(jpg|jpeg|png|JPG|JPEG|PNG)$', '.txt', image_path).replace('images', 'labels')
+        label_path = re.sub('.(jpg|jpeg|png|JPG|JPEG|PNG)$', '.txt', image_path).replace('images/', 'labels/')
         df_bbox = pd.read_csv(label_path, delimiter=' ', names=bbox_columns)
         image = cv2.imread(image_path)
         y, x = image.shape[:2]
@@ -148,14 +148,14 @@ class Oid2yolo:
             image = cv2.rectangle(image, (x_min, y_min), (x_max, y_max), color=(0, 255), thickness=2)
             cv2.putText(image, class_name, (x_min, y_min),
                         cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2, cv2.LINE_AA)
-        bbox_image_path = image_path.replace('images', 'images_w_bbox')
+        bbox_image_path = image_path.replace('images/', 'images_w_bbox/')
         os.makedirs(os.path.dirname(bbox_image_path), exist_ok=True)
         cv2.imwrite(bbox_image_path, image)
 
     def draw_bbox_all(self, data_type):
         num_image_paths = 0
         for dataset_type in self.annotation.keys():
-            if data_type is not "all" and data_type is not dataset_type:
+            if data_type != "all" and data_type != dataset_type:
                 continue
             images_dir = self.yolo_obj[dataset_type]
             images_path = [p for p in glob.glob(images_dir + '/**', recursive=True)

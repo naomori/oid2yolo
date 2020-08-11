@@ -1,0 +1,26 @@
+{
+  "images": {
+    "train": "/workspace/oid2yolo_proj/oid/train/*.tar.gz",
+    "val": "/workspace/oid2yolo_proj/oid/val/*.tar.gz",
+    "test": "/workspace/oid2yolo_proj/oid/test/*.tar.gz"
+  },
+  "bbox": {
+    "train": "/workspace/oid2yolo_proj/oid/oidv6-train-annotations-bbox.csv",
+    "val": "/workspace/oid2yolo_proj/oid/validation-annotations-bbox.csv",
+    "test": "/workspace/oid2yolo_proj/oid/test-annotations-bbox.csv"
+  },
+  "class": "/workspace/oid2yolo_proj/oid/class-descriptions-boxable.csv",
+  "image_filter": {
+    "train_val": [
+      ["Vehicle registration plate"],
+      ["Human face", "Car"],
+      ["Human face", "Sun hat"],
+      ["Human face", "Helmet"],
+      ["Human face", "Sunglasses"]
+    ],
+    "test": [
+      ["Vehicle registration plate"],
+      ["Human face", "Person"]
+    ]
+  }
+}
