@@ -19,17 +19,16 @@ function get_train_cmd() {
     else
         cmd+=" --weights ${weights}"
     fi
-    echo ${cmd}
+    echo "${cmd}"
     return
 }
 
 function get_latest_exp_dir() {
     find_dir=$1
-    target_files=$(find ${find_dir} -type f -name "last*.pt")
-    latest_file=$(ls -tr ${target_files} | tail -1)
+    latest_file=$(find "${find_dir}" -type f -name "last*.pt" -print0 | xargs -0 ls -t | head -n 1)
     latest_dir=${latest_file%/*}
     parent_dir=${latest_dir%/*}
-    echo ${parent_dir}
+    echo "${parent_dir}"
     return
 }
 
@@ -37,6 +36,6 @@ cmd=$(get_train_cmd)
 ${cmd}
 
 exp_dir=$(get_latest_exp_dir "./runs")
-date=`date -I`
+date=$(date -I)
 
-rsync -ahv --progress ${exp_dir} /s3/runs-${date}-${model}-epoch${epoch_num}+100
+rsync -ahv --progress "${exp_dir}" "/s3/runs-${date}-${model}-epoch${epoch_num}+100"

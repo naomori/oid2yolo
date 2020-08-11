@@ -15,13 +15,13 @@ weights = "./weights/yolov5m.pt"
 
 
 def get_train_cmd(weights_path, from_resume=False):
-    cmdline =  f"python3 train.py"\
-               f" --img {img}"\
-               f" --batch {batch}"\
-               f" --epochs {epoch_num}"\
-               f" --data ./config/fdlpd_colab.yaml"\
-               f" --cfg ./models/{model}.yaml"\
-               f" --cache-images"
+    cmdline = f"python3 train.py"\
+              f" --img {img}"\
+              f" --batch {batch}"\
+              f" --epochs {epoch_num}"\
+              f" --data ./config/fdlpd_colab.yaml"\
+              f" --cfg ./models/{model}.yaml"\
+              f" --cache-images"
     if from_resume:
         cmdline += f" --resume {weights_path}"
     else:
