@@ -13,10 +13,10 @@ def create_tarball_list():
 
 
 def extract_tarball(src_dir, tar_name, dst_dir):
-    subprocess.run(f"rsync -ahv ${src_dir}/${tar_name} ${dst_dir}/", shell=True)
-    subprocess.run(f"chmod 660 ${dst_dir}/${tar_name}", shell=True)
-    subprocess.run(f"tar -C ${dst_dir} -zxf ${dst_dir}/${tar_name}", shell=True)
-    subprocess.run(f"rm -f ${dst_dir}/${tar_name}", shell=True)
+    subprocess.run(f"rsync -ahv {src_dir}/{tar_name} {dst_dir}/", shell=True)
+    subprocess.run(f"chmod 660 {dst_dir}/{tar_name}", shell=True)
+    subprocess.run(f"tar -C {dst_dir} -zxf {dst_dir}/{tar_name}", shell=True)
+    subprocess.run(f"rm -f {dst_dir}/{tar_name}", shell=True)
 
 
 source_dir = "/s3/yolo-nc2"

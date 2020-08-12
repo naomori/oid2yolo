@@ -15,6 +15,7 @@ rsync -ahv --progress /s3/runs-2020-08-10-yolov5m-epoch100/runs/exp0/weights/las
 rsync -ahv --progress /s3/runs-2020-08-11-yolov5m-epoch100+100/exp0/weights/last.pt     /content/yolov5/weights/yolov5m-last-200.pt
 rsync -ahv --progress /s3/runs-2020-08-12-yolov5m-epoch100+100+100/exp0/weights/last.pt /content/yolov5/weights/yolov5m-last-300.pt
 rsync -ahv --progress /s3/runs-yolov5x-2020-08-09-epoch50/runs/exp0/weights/last.pt     /content/yolov5/weights/yolov5x-last-50.pt
+
 chmod 664 /content/yolov5/weights/*.pt
 
 ( cd /content/yolov5/models/ || /bin/bash /content/yolov5/scripts/change_nc.sh )
