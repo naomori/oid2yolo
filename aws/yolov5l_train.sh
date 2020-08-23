@@ -2,10 +2,10 @@
 
 img=640
 batch=16
-epoch_num=100
+epoch_num=50
 model=yolov5l
 resume=false
-weights=./weights/yolov5l.pt
+weights=./weights/yolov5l-last-100.pt
 
 
 function get_train_cmd() {
@@ -38,4 +38,4 @@ ${cmd}
 exp_dir=$(get_latest_exp_dir "./runs")
 date=$(date -I)
 
-rsync -ahv --progress "${exp_dir}" "/s3/runs-${date}-${model}-epoch${epoch_num}"
+rsync -ahv --progress "${exp_dir}" "/s3/runs-${date}-${model}-epoch${epoch_num}+50"
